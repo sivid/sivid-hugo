@@ -1,16 +1,16 @@
-from subprocess import call
-import os, shutil
+# written for python2
+# why python2?  I'm blaming google cloud sdk, they installed it on my Windows machine.  (I think) 
 
+from subprocess import call
+import os, shutil, sys
+
+# you probably want to change this
 git_dir = "d:/git/"
 src = os.path.join(git_dir, "sivid-hugo/public")
 dst = os.path.join(git_dir, "sivid.github.io")
 
 # clear destination directory
-try:
-  dst_names = os.listdir(dst)
-except os.error, (errno, errstr):
-  print errno
-  print errstr
+dst_names = os.listdir(dst)
 for n in dst_names:
   if n == ".git":
     print "skip .git directory"
@@ -29,11 +29,7 @@ print "building static pages.."
 call(["hugo", "-t", "hugo_theme_beg"])
 
 # copy to destination dir
-try:
-  src_names = os.listdir(src)
-except os.error, (errno, errstr):
-  print errno
-  print errstr
+src_names = os.listdir(src)
 for n in src_names:
   if n == ".git":
     print "skip .git directory"
@@ -57,7 +53,7 @@ call(["git", "-C", dst, "add", "-A"])
 print "now input commit messages"
 input_list = []
 while True:
-    input_str = raw_input(">").strip()
+    input_str = raw_input(">").rstrip()
     # print "input_str was >>>" + input_str + "<<<"
     print "input a dot \".\" to end git commit message"
     if input_str == ".":

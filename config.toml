@@ -9,4 +9,5 @@ title = "my (new) blog"
 
 [Params]
   Author = "sivid"
-  
+  googleAnalytics = "UA-81820759-1"
+  GoogleAnalyticsUserID = "UA-81820759-1"
